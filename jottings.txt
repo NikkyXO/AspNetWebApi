@@ -1,0 +1,33 @@
+dotnet new webapi --use-controllers -o TodoApi
+dotnet add package Microsoft.EntityFrameworkCore.InMemory
+dotnet watch --launch-profile https
+
+dotnet add package NSwag.AspNetCore
+
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+dotnet add package Microsoft.EntityFrameworkCore.Tools
+dotnet tool uninstall -g dotnet-aspnet-codegenerator
+dotnet tool install -g dotnet-aspnet-codegenerator
+dotnet tool update -g dotnet-aspnet-codegenerator
+
+
+echo 'export PATH=$HOME/.dotnet/tools:$PATH' >> ~/.zshrc
+source ~/.zshrc
+
+dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc DataBaseContext -outDir Controllers
+
+dotnet add package Scalar.AspNetCore
+
+
+✅ 2. Deploy via Visual Studio (GUI)
+If you're using Visual Studio (on Windows or Mac):
+
+Right-click your ASP.NET project → Publish
+
+Select Azure → Azure App Service
+
+Sign in and choose an existing App Service or create a new one
+
+Click Publish
