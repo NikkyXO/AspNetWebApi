@@ -75,8 +75,8 @@ namespace TodoApi.Controllers
 
                 _context.Courses.Add(course);
                 await _context.SaveChangesAsync();
-                _logger.LogInformation("Successfully created course with ID {Id}.", course.Id);
-                return CreatedAtAction(nameof(GetCourse), new { id = course.Id }, course);
+                _logger.LogInformation("Successfully created course with ID {Id}.", course.CourseId);
+                return CreatedAtAction(nameof(GetCourse), new { id = course.CourseId }, course);
             }
             catch (Exception ex)
             {
@@ -155,7 +155,7 @@ namespace TodoApi.Controllers
                 // _context.Courses.Remove(course);
                 // to optimize the deletion process, we can use Entry to set the state to Deleted
                 // and reduce sql queries
-                Course courseToDelete = new Course() { Id = id };
+                Course courseToDelete = new Course() { CourseId = id };
                 _context.Entry(courseToDelete).State = EntityState.Deleted;
                 await _context.SaveChangesAsync();
                 await _context.SaveChangesAsync();
